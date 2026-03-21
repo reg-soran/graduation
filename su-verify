@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soran University — Certificate Verification</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:20px;}
+.card{background:#fff;border-radius:16px;
+  box-shadow:0 8px 40px rgba(30,34,69,.15);max-width:480px;width:100%;overflow:hidden;}
+.header{background:#1e2245;padding:22px 24px;display:flex;align-items:center;gap:16px;}
+.header img{width:50px;height:50px;object-fit:contain;border-radius:8px;}
+.uni{font-size:17px;font-weight:700;color:#fff;letter-spacing:1px;}
+.sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;letter-spacing:.5px;}
+.body{padding:24px;}
+.status{display:flex;align-items:center;gap:12px;padding:14px 16px;
+  border-radius:10px;margin-bottom:22px;background:#ecfdf5;border:1.5px solid #6ee7b7;}
+.icon{font-size:28px;flex-shrink:0;}
+.st-title{font-size:15px;font-weight:700;color:#111;}
+.st-sub{font-size:12px;color:#666;margin-top:2px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:10px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;color:#1e2245;margin-bottom:3px;}
+.field .val{font-size:14px;color:#111;font-weight:500;}
+.rtl{direction:rtl;}
+hr{border:none;border-top:1px solid #eee;margin:16px 0;}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px;}
+.stat{background:#f8f9fe;border-radius:8px;padding:12px 8px;text-align:center;}
+.sv{font-size:17px;font-weight:700;color:#1e2245;}
+.sl{font-size:10px;color:#888;margin-top:3px;}
+.footer{background:#f8f9fe;border-top:1px solid #eee;padding:14px 24px;
+  font-size:11px;color:#aaa;text-align:center;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <img src="https://drive.google.com/thumbnail?id=1T1iOVM0RkpZhZgFjdF821-RnGCZpmyT0&sz=w200"
+         onerror="this.style.display='none'" alt="SU">
+    <div>
+      <div class="uni">SORAN UNIVERSITY</div>
+      <div class="sub">OFFICIAL CERTIFICATE VERIFICATION</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="status">
+      <span class="icon">✅</span>
+      <div>
+        <div class="st-title">Certificate Verified</div>
+        <div class="st-sub">This is an authentic Soran University certificate.</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Student Name</label>
+      <div class="val" id="f-name">—</div>
+    </div>
+    <div class="field">
+      <label>Student ID</label>
+      <div class="val" id="f-uid">—</div>
+    </div>
+    <div class="field">
+      <label>Faculty</label>
+      <div class="val" id="f-fac">—</div>
+    </div>
+    <div class="field">
+      <label>Department</label>
+      <div class="val" id="f-dept">—</div>
+    </div>
+
+    <hr>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="sv" id="f-avg">—</div>
+        <div class="sl">Average</div>
+      </div>
+      <div class="stat">
+        <div class="sv" id="f-ects">—</div>
+        <div class="sl">Total ECTS</div>
+      </div>
+      <div class="stat">
+        <div class="sv" id="f-yr">—</div>
+        <div class="sl">Grad. Year</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Degree Awarded</label>
+      <div class="val" id="f-deg">—</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    This verification is provided by Soran University official systems.<br>
+    For queries: register@soran.edu.iq &nbsp;·&nbsp; soran.edu.iq
+  </div>
+</div>
+
+<script>
+function p(name){ return new URLSearchParams(window.location.search).get(name)||'—'; }
+function isRTL(s){ return /[\u0600-\u06FF]/.test(String(s||'')); }
+function set(id, val){
+  var el = document.getElementById(id);
+  if(el){ el.textContent = val; if(isRTL(val)) el.classList.add('rtl'); }
+}
+
+set('f-name', p('n'));
+set('f-uid',  p('u'));
+set('f-fac',  p('f'));
+set('f-dept', p('dp'));
+set('f-avg',  p('av'));
+set('f-ects', p('ec'));
+set('f-yr',   p('yr'));
+set('f-deg',  p('dg') !== '—' ? 'Bachelor of '+p('dg') : 'Bachelor of Science (BSc)');
+</script>
+</body>
+</html>
