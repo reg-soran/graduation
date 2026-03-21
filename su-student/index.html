@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Soran University — Student Verification</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
@@ -27,19 +28,24 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
 .field{margin-bottom:12px;}
 .field label{display:block;font-size:10px;font-weight:700;letter-spacing:.8px;
   text-transform:uppercase;color:#6b7a99;margin-bottom:3px;}
-.field .val{font-size:14px;color:#111;font-weight:500;}
+.field .val{font-size:14px;color:#111;font-weight:500;line-height:1.5;}
 .field .val.rtl{direction:rtl;font-family:'Noto Sans Arabic',Arial,sans-serif;}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;}
 .stat{background:#f8f9fe;border-radius:8px;padding:12px 8px;text-align:center;}
 .sv{font-size:20px;font-weight:700;color:#1e2245;}
 .sl{font-size:10px;color:#888;margin-top:3px;}
-.footer{background:#f8f9fe;border-top:1px solid #eee;padding:14px 24px;
-  font-size:11px;color:#aaa;text-align:center;line-height:1.7;}
+.send-to-box{background:#f0fdf4;border:1.5px solid #6ee7b7;border-radius:10px;
+  padding:14px 16px;margin:16px 0;}
+.send-to-box .label{font-size:10px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;color:#059669;margin-bottom:6px;}
+.send-to-box .val{font-size:13px;color:#111;font-weight:600;
+  direction:rtl;font-family:'Noto Sans Arabic',Arial,sans-serif;line-height:1.6;}
 .stamp{text-align:center;margin:16px 0 4px;}
 .stamp span{display:inline-block;padding:6px 18px;
   background:#ecfdf5;border:1.5px solid #6ee7b7;
-  border-radius:20px;font-size:12px;font-weight:700;color:#059669;
-  letter-spacing:.5px;}
+  border-radius:20px;font-size:12px;font-weight:700;color:#059669;letter-spacing:.5px;}
+.footer{background:#f8f9fe;border-top:1px solid #eee;padding:14px 24px;
+  font-size:11px;color:#aaa;text-align:center;line-height:1.7;}
 </style>
 </head>
 <body>
@@ -49,7 +55,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
          onerror="this.style.display='none'" alt="SU">
     <div>
       <div class="uni">SORAN UNIVERSITY</div>
-      <div class="sub">OFFICIAL STUDENT VERIFICATION</div>
+      <div class="sub">OFFICIAL STUDENT LETTER VERIFICATION</div>
     </div>
   </div>
 
@@ -57,9 +63,15 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
     <div class="status">
       <span class="icon">✅</span>
       <div>
-        <div class="st-title">Student Verified</div>
-        <div class="st-sub">This is an authentic Soran University student record.</div>
+        <div class="st-title">Letter Verified</div>
+        <div class="st-sub">This is an authentic Soran University official letter.</div>
       </div>
+    </div>
+
+    <!-- SEND TO box -->
+    <div class="send-to-box">
+      <div class="label">📨 Addressed To</div>
+      <div class="val" id="f-to">—</div>
     </div>
 
     <div class="section-title">Student Information</div>
@@ -96,8 +108,8 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
         <div class="sl">Total ECTS Passed</div>
       </div>
       <div class="stat">
-        <div class="sv" id="f-status">Active</div>
-        <div class="sl">Status</div>
+        <div class="sv">✅</div>
+        <div class="sl">Active Student</div>
       </div>
     </div>
 
@@ -114,13 +126,13 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
 
 <script>
 function p(name){
-  return new URLSearchParams(window.location.search).get(name) || '—';
+  return new URLSearchParams(window.location.search).get(name) || '';
 }
 function isRTL(s){ return /[\u0600-\u06FF]/.test(String(s||'')); }
 function set(id, val){
   var el = document.getElementById(id);
   if(!el) return;
-  el.textContent = (val && val !== '—') ? val : '—';
+  el.textContent = (val && val.trim()) ? val : '—';
   if(isRTL(val)) el.classList.add('rtl');
 }
 
@@ -128,8 +140,34 @@ set('f-name',  p('n'));
 set('f-uid',   p('u'));
 set('f-fac',   p('f'));
 set('f-dept',  p('dp'));
-set('f-stage', p('st') !== '—' ? 'Stage ' + p('st') : '—');
-set('f-ects',  p('ec') !== '—' && p('ec') !== '0' ? p('ec') : '—');
+set('f-to',    p('to'));
+set('f-stage', p('st') ? 'Stage ' + p('st') : '—');
+set('f-ects',  p('ec') && p('ec') !== '0' ? p('ec') : '—');
 </script>
 </body>
 </html>
+```
+
+---
+
+## When Scanned it Will Show:
+```
+✅ Letter Verified
+─────────────────────────────
+📨 Addressed To
+  بەڕێوەبەرایەتی پەروەردەی سۆران   ← whatever user selected
+
+Student Information
+  Full Name:   [Kurdish Name]
+  Email/ID:    [Email]
+
+Academic Information
+  Faculty:     [Faculty]
+  Department:  [Department]
+  Stage:       Stage 3
+
+Academic Progress
+  [240]        [✅]
+  Total ECTS   Active Student
+
+✅ VERIFIED BY SORAN UNIVERSITY
