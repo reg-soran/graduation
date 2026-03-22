@@ -110,9 +110,22 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
       </div>
     </div>
 
-    <div class="stamp">
-      <span>🎓 VERIFIED BY SORAN UNIVERSITY</span>
+ <div class="stamp">
+      <span>✅ VERIFIED BY SORAN UNIVERSITY</span>
     </div>
+
+    <!-- ✅ Generation date/time -->
+    <div id="gen-date-box" style="display:none;margin-top:12px;
+      background:#f8f9fe;border:1px solid #e0e3f0;border-radius:8px;
+      padding:10px 14px;text-align:center;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.8px;
+        text-transform:uppercase;color:#6b7a99;margin-bottom:4px;">
+        📅 Document Generated
+      </div>
+      <div id="f-dt" style="font-size:13px;font-weight:600;color:#1e2245;
+        direction:ltr;">—</div>
+    </div>
+  </div>
   </div>
 
   <div class="footer">
@@ -141,6 +154,11 @@ set('f-to',   p('to'));
 set('f-yr',   p('yr'));
 set('f-gr',   p('gr'));
 set('f-rk',   p('rk') && p('rk') !== '0' ? '#' + p('rk') : '—');
+  var dt = p('dt');
+if (dt && dt !== '—') {
+  document.getElementById('gen-date-box').style.display = 'block';
+  document.getElementById('f-dt').textContent = dt;
+}
 </script>
 </body>
 </html>
