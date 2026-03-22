@@ -89,9 +89,20 @@ hr{border:none;border-top:1px solid #eee;margin:16px 0;}
       </div>
     </div>
 
-    <div class="field">
+<div class="field">
       <label>Degree Awarded</label>
       <div class="val" id="f-deg">—</div>
+    </div>
+
+    <div id="gen-date-box" style="display:none;margin-top:12px;
+      background:#f8f9fe;border:1px solid #e0e3f0;border-radius:8px;
+      padding:10px 14px;text-align:center;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.8px;
+        text-transform:uppercase;color:#6b7a99;margin-bottom:4px;">
+        📅 Document Generated
+      </div>
+      <div id="f-dt" style="font-size:13px;font-weight:600;color:#1e2245;
+        direction:ltr;">—</div>
     </div>
   </div>
 
@@ -117,6 +128,11 @@ set('f-avg',  p('av'));
 set('f-ects', p('ec'));
 set('f-yr',   p('yr'));
 set('f-deg',  p('dg') !== '—' ? 'Bachelor of '+p('dg') : 'Bachelor of Science (BSc)');
+  var dt = p('dt');
+if (dt && dt !== '—') {
+  document.getElementById('gen-date-box').style.display = 'block';
+  document.getElementById('f-dt').textContent = dt;
+}
 </script>
 </body>
 </html>
