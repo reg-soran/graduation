@@ -22,6 +22,12 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
 .icon{font-size:28px;flex-shrink:0;}
 .st-title{font-size:15px;font-weight:700;color:#2563eb;}
 .st-sub{font-size:12px;color:#666;margin-top:2px;}
+.send-to-box{background:#eff6ff;border:1.5px solid #93c5fd;border-radius:10px;
+  padding:14px 16px;margin-bottom:18px;}
+.send-to-box .label{font-size:10px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;color:#2563eb;margin-bottom:6px;}
+.send-to-box .val{font-size:13px;color:#111;font-weight:600;
+  direction:rtl;font-family:'Noto Sans Arabic',Arial,sans-serif;line-height:1.6;}
 .section-title{font-size:11px;font-weight:700;letter-spacing:1px;
   text-transform:uppercase;color:#2563eb;margin:18px 0 10px;
   padding-bottom:6px;border-bottom:2px solid #dbeafe;}
@@ -30,15 +36,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
   text-transform:uppercase;color:#6b7a99;margin-bottom:3px;}
 .field .val{font-size:14px;color:#111;font-weight:500;line-height:1.5;}
 .field .val.rtl{direction:rtl;font-family:'Noto Sans Arabic',Arial,sans-serif;}
-.send-to-box{background:#eff6ff;border:1.5px solid #93c5fd;border-radius:10px;
-  padding:14px 16px;margin:16px 0;}
-.send-to-box .label{font-size:10px;font-weight:700;letter-spacing:.8px;
-  text-transform:uppercase;color:#2563eb;margin-bottom:6px;}
-.send-to-box .val{font-size:13px;color:#111;font-weight:600;
-  direction:rtl;font-family:'Noto Sans Arabic',Arial,sans-serif;line-height:1.6;}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px;}
 .stat{background:#eff6ff;border-radius:8px;padding:12px 8px;text-align:center;}
-.sv{font-size:17px;font-weight:700;color:#2563eb;}
+.sv{font-size:16px;font-weight:700;color:#2563eb;}
 .sl{font-size:10px;color:#888;margin-top:3px;}
 .stamp{text-align:center;margin:16px 0 4px;}
 .stamp span{display:inline-block;padding:6px 18px;
@@ -88,16 +88,24 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
       <label>Department</label>
       <div class="val rtl" id="f-dept">—</div>
     </div>
+    <div class="field">
+      <label>Shift</label>
+      <div class="val rtl" id="f-shift">—</div>
+    </div>
 
     <div class="section-title">Graduation Details</div>
     <div class="stats">
       <div class="stat">
         <div class="sv" id="f-yr">—</div>
-        <div class="sl">Graduation Year</div>
+        <div class="sl">Grad. Year</div>
       </div>
       <div class="stat">
-        <div class="sv">✅</div>
-        <div class="sl">Verified</div>
+        <div class="sv" id="f-gr">—</div>
+        <div class="sl">Grade</div>
+      </div>
+      <div class="stat">
+        <div class="sv" id="f-rk">—</div>
+        <div class="sl">Rank</div>
       </div>
     </div>
 
@@ -124,11 +132,14 @@ function set(id, val){
   if(isRTL(val)) el.classList.add('rtl');
 }
 
-set('f-name', p('n'));
-set('f-fac',  p('f'));
-set('f-dept', p('dp'));
-set('f-yr',   p('yr'));
-set('f-to',   p('to'));
+set('f-name',  p('n'));
+set('f-fac',   p('f'));
+set('f-dept',  p('dp'));
+set('f-shift', p('sh'));
+set('f-yr',    p('yr'));
+set('f-gr',    p('gr'));
+set('f-rk',    p('rk') && p('rk') !== '0' ? '#' + p('rk') : '—');
+set('f-to',    p('to'));
 </script>
 </body>
 </html>
