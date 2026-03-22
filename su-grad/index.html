@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soran University — Graduation Verification</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:20px;}
+.card{background:#fff;border-radius:16px;
+  box-shadow:0 8px 40px rgba(30,34,69,.15);max-width:480px;width:100%;overflow:hidden;}
+.header{background:#7c3aed;padding:22px 24px;display:flex;align-items:center;gap:16px;}
+.header img{width:50px;height:50px;object-fit:contain;border-radius:8px;}
+.uni{font-size:17px;font-weight:700;color:#fff;letter-spacing:1px;}
+.sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;letter-spacing:.5px;text-transform:uppercase;}
+.body{padding:24px;}
+.status{display:flex;align-items:center;gap:12px;padding:14px 16px;
+  border-radius:10px;margin-bottom:22px;background:#f5f3ff;border:1.5px solid #a78bfa;}
+.icon{font-size:28px;flex-shrink:0;}
+.st-title{font-size:15px;font-weight:700;color:#7c3aed;}
+.st-sub{font-size:12px;color:#666;margin-top:2px;}
+.section-title{font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;color:#7c3aed;margin:18px 0 10px;
+  padding-bottom:6px;border-bottom:2px solid #ede9fe;}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:10px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;color:#6b7a99;margin-bottom:3px;}
+.field .val{font-size:14px;color:#111;font-weight:500;line-height:1.5;}
+.field .val.rtl{direction:rtl;font-family:'Noto Sans Arabic',Arial,sans-serif;}
+.send-to-box{background:#f5f3ff;border:1.5px solid #a78bfa;border-radius:10px;
+  padding:14px 16px;margin:16px 0;}
+.send-to-box .label{font-size:10px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;color:#7c3aed;margin-bottom:6px;}
+.send-to-box .val{font-size:13px;color:#111;font-weight:600;
+  direction:rtl;font-family:'Noto Sans Arabic',Arial,sans-serif;line-height:1.6;}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:4px;}
+.stat{background:#f5f3ff;border-radius:8px;padding:12px 8px;text-align:center;}
+.sv{font-size:17px;font-weight:700;color:#7c3aed;}
+.sl{font-size:10px;color:#888;margin-top:3px;}
+.stamp{text-align:center;margin:16px 0 4px;}
+.stamp span{display:inline-block;padding:6px 18px;
+  background:#f5f3ff;border:1.5px solid #a78bfa;
+  border-radius:20px;font-size:12px;font-weight:700;color:#7c3aed;letter-spacing:.5px;}
+.footer{background:#f8f9fe;border-top:1px solid #eee;padding:14px 24px;
+  font-size:11px;color:#aaa;text-align:center;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <img src="https://drive.google.com/thumbnail?id=1T1iOVM0RkpZhZgFjdF821-RnGCZpmyT0&sz=w200"
+         onerror="this.style.display='none'" alt="SU">
+    <div>
+      <div class="uni">SORAN UNIVERSITY</div>
+      <div class="sub">OFFICIAL GRADUATION VERIFICATION</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="status">
+      <span class="icon">🎓</span>
+      <div>
+        <div class="st-title">Graduation Certificate Verified</div>
+        <div class="st-sub">This is an authentic Soran University graduation certificate.</div>
+      </div>
+    </div>
+
+    <!-- SEND TO -->
+    <div class="send-to-box">
+      <div class="label">📨 Addressed To</div>
+      <div class="val" id="f-to">—</div>
+    </div>
+
+    <div class="section-title">Student Information</div>
+    <div class="field">
+      <label>Full Name</label>
+      <div class="val rtl" id="f-name">—</div>
+    </div>
+    <div class="field">
+      <label>Student ID / S_Code</label>
+      <div class="val" id="f-uid">—</div>
+    </div>
+
+    <div class="section-title">Academic Information</div>
+    <div class="field">
+      <label>Faculty</label>
+      <div class="val rtl" id="f-fac">—</div>
+    </div>
+    <div class="field">
+      <label>Department</label>
+      <div class="val rtl" id="f-dept">—</div>
+    </div>
+
+    <div class="section-title">Graduation Details</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="sv" id="f-yr">—</div>
+        <div class="sl">Graduation Year</div>
+      </div>
+      <div class="stat">
+        <div class="sv" id="f-gr">—</div>
+        <div class="sl">Grade</div>
+      </div>
+      <div class="stat">
+        <div class="sv" id="f-rk">—</div>
+        <div class="sl">Rank</div>
+      </div>
+    </div>
+
+    <div class="stamp">
+      <span>🎓 VERIFIED BY SORAN UNIVERSITY</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    This verification is provided by Soran University official systems.<br>
+    For queries: register@soran.edu.iq &nbsp;·&nbsp; soran.edu.iq
+  </div>
+</div>
+
+<script>
+function p(name){
+  return new URLSearchParams(window.location.search).get(name) || '';
+}
+function isRTL(s){ return /[\u0600-\u06FF]/.test(String(s||'')); }
+function set(id, val){
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.textContent = (val && val.trim()) ? val : '—';
+  if(isRTL(val)) el.classList.add('rtl');
+}
+
+set('f-name', p('n'));
+set('f-uid',  p('u'));
+set('f-fac',  p('f'));
+set('f-dept', p('dp'));
+set('f-to',   p('to'));
+set('f-yr',   p('yr'));
+set('f-gr',   p('gr'));
+set('f-rk',   p('rk') && p('rk') !== '0' ? '#' + p('rk') : '—');
+</script>
+</body>
+</html>
