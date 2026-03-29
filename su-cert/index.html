@@ -129,8 +129,21 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
 </div>
 
 <script>
-function p(name){
+
+  function p(name){
   return new URLSearchParams(window.location.search).get(name) || '';
+}
+
+function b64ToUtf8(b64) {
+  try {
+    b64 = b64.replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';
+    return decodeURIComponent(
+      atob(b64).split('').map(c =>
+        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      ).join('')
+    );
+  } catch(e) { return b64; }
 }
 function isRTL(s){ return /[\u0600-\u06FF]/.test(String(s||'')); }
 function set(id, val){
@@ -140,13 +153,13 @@ function set(id, val){
   if(isRTL(val)) el.classList.add('rtl');
 }
 
-set('f-name', p('n'));
-set('f-fac',  p('f'));
-set('f-dept', p('dp'));
+set('f-name', b64ToUtf8(p('n')));
+set('f-fac',  b64ToUtf8(p('f')));
+set('f-dept', b64ToUtf8(p('dp')));
 set('f-yr',   p('yr'));
-set('f-ev',   p('ev'));
+set('f-ev',   b64ToUtf8(p('ev')));
 set('f-rk',   p('rk') && p('rk') !== '0' ? '#' + p('rk') : '—');
-set('f-to',   p('to'));
+set('f-to',   b64ToUtf8(p('to')));
   var dt = p('dt');
 if (dt && dt !== '—') {
   document.getElementById('gen-date-box').style.display = 'block';
