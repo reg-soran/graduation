@@ -138,6 +138,20 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
 function p(name){
   return new URLSearchParams(window.location.search).get(name) || '';
 }
+
+function b64ToUtf8(b64) {
+  try {
+    // Convert web-safe base64 back to standard base64
+    b64 = b64.replace(/-/g, '+').replace(/_/g, '/');
+    // Add padding if needed
+    while (b64.length % 4) b64 += '=';
+    return decodeURIComponent(
+      atob(b64).split('').map(c =>
+        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      ).join('')
+    );
+  } catch(e) { return b64; }
+}
 function isRTL(s){ return /[\u0600-\u06FF]/.test(String(s||'')); }
 function set(id, val){
   var el = document.getElementById(id);
@@ -146,11 +160,11 @@ function set(id, val){
   if(isRTL(val)) el.classList.add('rtl');
 }
 
-set('f-name', p('n'));
+set('f-name', b64ToUtf8(p('n')));
 set('f-uid',  p('u'));
-set('f-fac',  p('f'));
-set('f-dept', p('dp'));
-set('f-to',   p('to'));
+set('f-fac',  b64ToUtf8(p('f')));
+set('f-dept', b64ToUtf8(p('dn')));
+set('f-to',   b64ToUtf8(p('to')));
 set('f-yr',   p('yr'));
 set('f-gr',   p('gr'));
 set('f-rk',   p('rk') && p('rk') !== '0' ? '#' + p('rk') : '—');
