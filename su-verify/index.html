@@ -113,22 +113,38 @@ hr{border:none;border-top:1px solid #eee;margin:16px 0;}
 </div>
 
 <script>
-function p(name){ return new URLSearchParams(window.location.search).get(name)||'—'; }
+function p(name){ return new URLSearchParams(window.location.search).get(name) || ''; }
+
+function b64ToUtf8(b64) {
+  try {
+    b64 = b64.replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';
+    return decodeURIComponent(
+      atob(b64).split('').map(c =>
+        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      ).join('')
+    );
+  } catch(e) { return b64; }
+}
+
 function isRTL(s){ return /[\u0600-\u06FF]/.test(String(s||'')); }
 function set(id, val){
   var el = document.getElementById(id);
-  if(el){ el.textContent = val; if(isRTL(val)) el.classList.add('rtl'); }
+  if(!el) return;
+  el.textContent = (val && val.trim()) ? val : '—';
+  if(isRTL(val)) el.classList.add('rtl');
 }
 
-set('f-name', p('n'));
+set('f-name', b64ToUtf8(p('n')));
 set('f-uid',  p('u'));
-set('f-fac',  p('f'));
-set('f-dept', p('dp'));
+set('f-fac',  b64ToUtf8(p('f')));
+set('f-dept', b64ToUtf8(p('dp')));
 set('f-avg',  p('av'));
 set('f-ects', p('ec'));
 set('f-yr',   p('yr'));
-set('f-deg',  p('dg') !== '—' ? 'Bachelor of '+p('dg') : 'Bachelor of Science (BSc)');
-  var dt = p('dt');
+set('f-deg',  p('dg') ? 'Bachelor of ' + p('dg') : 'Bachelor of Science (BSc)');
+
+var dt = p('dt');
 if (dt && dt !== '—') {
   document.getElementById('gen-date-box').style.display = 'block';
   document.getElementById('f-dt').textContent = dt;
