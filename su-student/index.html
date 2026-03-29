@@ -137,8 +137,19 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
 </div>
 
 <script>
-function p(name){
+
+  function p(name){
   return new URLSearchParams(window.location.search).get(name) || '';
+}
+
+function b64ToUtf8(b64) {
+  try {
+    return decodeURIComponent(
+      atob(b64).split('').map(c =>
+        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      ).join('')
+    );
+  } catch(e) { return b64; }
 }
 function isRTL(s){ return /[\u0600-\u06FF]/.test(String(s||'')); }
 function set(id, val){
@@ -148,11 +159,11 @@ function set(id, val){
   if(isRTL(val)) el.classList.add('rtl');
 }
 
-set('f-name',  p('n'));
+set('f-name',  b64ToUtf8(p('n')));
 set('f-uid',   p('u'));
 set('f-fac',   p('f'));
-set('f-dept',  p('dp'));
-set('f-to',    p('to'));
+set('f-dept',  b64ToUtf8(p('dn')));
+set('f-to',    b64ToUtf8(p('to')));
 set('f-stage', p('st') ? 'Stage ' + p('st') : '—');
 set('f-ects',  p('ec') && p('ec') !== '0' ? p('ec') : '—');
   var dt = p('dt');
