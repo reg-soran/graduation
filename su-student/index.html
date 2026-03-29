@@ -142,8 +142,11 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;
   return new URLSearchParams(window.location.search).get(name) || '';
 }
 
-function b64ToUtf8(b64) {
+
+  function b64ToUtf8(b64) {
   try {
+    b64 = b64.replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';
     return decodeURIComponent(
       atob(b64).split('').map(c =>
         '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
