@@ -1,1 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جامعة سوران — التحقق من وثيقة التخرج</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans Arabic','Segoe UI',Arial,sans-serif;background:#f0f2f8;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:20px;}
+.card{background:#fff;border-radius:16px;
+  box-shadow:0 8px 40px rgba(30,34,69,.15);max-width:480px;width:100%;overflow:hidden;}
+.header{background:#7c3aed;padding:22px 24px;display:flex;align-items:center;gap:16px;}
+.header img{width:50px;height:50px;object-fit:contain;border-radius:8px;}
+.uni{font-size:18px;font-weight:700;color:#fff;letter-spacing:.5px;}
+.sub{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px;letter-spacing:.5px;}
+.body{padding:24px;}
+.status{display:flex;align-items:center;gap:12px;padding:14px 16px;
+  border-radius:10px;margin-bottom:22px;background:#f5f3ff;border:1.5px solid #a78bfa;}
+.icon{font-size:28px;flex-shrink:0;}
+.st-title{font-size:15px;font-weight:700;color:#7c3aed;}
+.st-sub{font-size:12px;color:#666;margin-top:2px;line-height:1.5;}
+.section-title{font-size:12px;font-weight:700;letter-spacing:.5px;
+  color:#7c3aed;margin:18px 0 10px;
+  padding-bottom:6px;border-bottom:2px solid #ede9fe;}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.3px;
+  color:#6b7a99;margin-bottom:3px;}
+.field .val{font-size:15px;color:#111;font-weight:600;line-height:1.6;}
+.field .val.ltr{direction:ltr;text-align:right;}
+.send-to-box{background:#f5f3ff;border:1.5px solid #a78bfa;border-radius:10px;
+  padding:14px 16px;margin:16px 0;}
+.send-to-box .label{font-size:11px;font-weight:700;letter-spacing:.3px;
+  color:#7c3aed;margin-bottom:6px;}
+.send-to-box .val{font-size:14px;color:#111;font-weight:600;line-height:1.7;}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:4px;}
+.stat{background:#f5f3ff;border-radius:8px;padding:12px 8px;text-align:center;}
+.sv{font-size:16px;font-weight:700;color:#7c3aed;}
+.sl{font-size:10px;color:#888;margin-top:4px;}
+.stamp{text-align:center;margin:18px 0 4px;}
+.stamp span{display:inline-block;padding:7px 20px;
+  background:#f5f3ff;border:1.5px solid #a78bfa;
+  border-radius:20px;font-size:13px;font-weight:700;color:#7c3aed;}
+.footer{background:#f8f9fe;border-top:1px solid #eee;padding:14px 24px;
+  font-size:11px;color:#aaa;text-align:center;line-height:1.8;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <img src="https://drive.google.com/thumbnail?id=1T1iOVM0RkpZhZgFjdF821-RnGCZpmyT0&sz=w200"
+         onerror="this.style.display='none'" alt="SU">
+    <div>
+      <div class="uni">جامعة سوران</div>
+      <div class="sub">التحقق الرسمي من وثيقة التخرج</div>
+    </div>
+  </div>
 
+  <div class="body">
+    <div class="status">
+      <span class="icon">🎓</span>
+      <div>
+        <div class="st-title">تم التحقق من وثيقة التخرج</div>
+        <div class="st-sub">هذه وثيقة تخرج رسمية صادرة من جامعة سوران.</div>
+      </div>
+    </div>
+
+    <!-- مرسلة إلى -->
+    <div class="send-to-box">
+      <div class="label">📨 مرسلة إلى</div>
+      <div class="val" id="f-to">—</div>
+    </div>
+
+    <div class="section-title">معلومات الطالب</div>
+    <div class="field">
+      <label>الاسم الكامل</label>
+      <div class="val" id="f-name">—</div>
+    </div>
+    <div class="field" id="row-uid" style="display:none">
+      <label>الرمز / S_Code</label>
+      <div class="val ltr" id="f-uid">—</div>
+    </div>
+
+    <div class="section-title">المعلومات الأكاديمية</div>
+    <div class="field">
+      <label>الكلية</label>
+      <div class="val" id="f-fac">—</div>
+    </div>
+    <div class="field">
+      <label>القسم</label>
+      <div class="val" id="f-dept">—</div>
+    </div>
+
+    <div class="section-title">تفاصيل التخرج</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="sv" id="f-yr">—</div>
+        <div class="sl">السنة الدراسية</div>
+      </div>
+      <div class="stat">
+        <div class="sv" id="f-ev">—</div>
+        <div class="sl">التقدير</div>
+      </div>
+      <div class="stat">
+        <div class="sv" id="f-rk">—</div>
+        <div class="sl">الترتيب</div>
+      </div>
+    </div>
+
+    <div class="stamp">
+      <span>✅ موثّقة من جامعة سوران</span>
+    </div>
+
+    <!-- تاريخ الإصدار -->
+    <div id="gen-date-box" style="display:none;margin-top:14px;
+      background:#f8f9fe;border:1px solid #e0e3f0;border-radius:8px;
+      padding:10px 14px;text-align:center;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.3px;
+        color:#6b7a99;margin-bottom:4px;">
+        📅 تاريخ إصدار الوثيقة
+      </div>
+      <div id="f-dt" style="font-size:13px;font-weight:600;color:#1e2245;
+        direction:ltr;">—</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    هذا التحقق مُقدَّم من الأنظمة الرسمية لجامعة سوران.<br>
+    للاستفسار: register@soran.edu.iq &nbsp;·&nbsp; soran.edu.iq
+  </div>
+</div>
+
+<script>
+function p(name){
+  return new URLSearchParams(window.location.search).get(name) || '';
+}
+
+// Web-safe Base64 → UTF-8 (matches base64UrlEncode() in generate.php)
+function b64ToUtf8(b64){
+  try{
+    b64 = b64.replace(/-/g,'+').replace(/_/g,'/');
+    while(b64.length % 4) b64 += '=';
+    return decodeURIComponent(
+      atob(b64).split('').map(c =>
+        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      ).join('')
+    );
+  }catch(e){ return b64; }
+}
+
+function set(id, val){
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.textContent = (val && String(val).trim()) ? val : '—';
+}
+
+// Parameters sent by generate.php:
+//   n=name(b64)  f=faculty(plain)  dp=dept(b64)  yr=year
+//   ev=grade(b64)  rk=rank  to=send-to(b64)  dt=datetime  [u=S_Code optional]
+set('f-name', b64ToUtf8(p('n')));
+set('f-to',   b64ToUtf8(p('to')));
+set('f-fac',  p('f'));                 // faculty is sent as plain text
+set('f-dept', b64ToUtf8(p('dp')));
+set('f-yr',   p('yr'));
+set('f-ev',   b64ToUtf8(p('ev')));
+set('f-rk',   (p('rk') && p('rk') !== '0') ? p('rk') : '—');
+
+// Optional student code (only shown if present in the QR)
+var uid = p('u');
+if(uid && uid.trim()){
+  document.getElementById('row-uid').style.display = 'block';
+  set('f-uid', uid);
+}
+
+// Generation date/time
+var dt = p('dt');
+if(dt && dt !== '—'){
+  document.getElementById('gen-date-box').style.display = 'block';
+  document.getElementById('f-dt').textContent = dt;
+}
+</script>
+</body>
+</html>
